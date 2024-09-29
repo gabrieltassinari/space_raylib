@@ -11,6 +11,7 @@ all: space
 
 space: ${OBJ}
 	${CC} ${CFLAGS} ${INCLUDES} -o $@ ${OBJ} ${LDFLAGS}
+
 run:
 	./space
 

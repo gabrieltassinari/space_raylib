@@ -3,12 +3,12 @@
 
 typedef struct {
 	int lifes;
+	float x;
+	float y;
 	size size;
-	pos pos;
 	int dir;
-	// TODO: Array with bullets
 } enemy;
 
-void init_enemy(enemy *e, float x, float y);
+enemy init_enemy(float x, float y);
 void update_enemy(enemy *e, float dt);
 void draw_enemy(enemy e);

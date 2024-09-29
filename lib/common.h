@@ -1,5 +1,4 @@
 #ifndef COMMON_H
-
 #define COMMON_H
 
 #define SCREEN_WIDTH 500
@@ -9,16 +8,10 @@
 #define PLAYER_HEIGHT 50
 
 typedef struct {
-	float x;
-	float y;
-	const int size;
-} pos;
-
-typedef struct {
 	int width;
 	int height;
 } size;
 
-int check_collision(pos b1, size s1, pos b2, size s2);
+int check_collision(float x1, float y1, size s1, float x2, float y2, size s2);
 
 #endif
