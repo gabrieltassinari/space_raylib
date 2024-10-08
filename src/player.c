@@ -13,7 +13,7 @@ player init_player() {
 		.lifes		= 3,
 		.x		= 250,
 		.y		= 200,
-		.b_count	= 0
+		.bullets	= NULL,
 	};
 
 	return p;

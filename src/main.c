@@ -20,6 +20,14 @@ int main() {
 		update_player(&p, dt);
 		update_enemy(&e, dt);
 
+		if (IsKeyPressed(KEY_SPACE)) {
+			bullet *tmp = create_bullet(p.x, p.y);
+
+			insert_bullet(&p.bullets, tmp);
+			debug_bullets(p.bullets);
+		}
+
+
 		BeginDrawing();
 			ClearBackground(BLACK);
 			draw_player(p);

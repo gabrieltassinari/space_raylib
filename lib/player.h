@@ -9,6 +9,7 @@ typedef struct {
 	float x;
 	float y;
 	size size;
+	bullet *bullets;
 } player;
 
 player init_player();
