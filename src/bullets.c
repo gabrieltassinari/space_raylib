@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <raylib.h>
 
 #include "../lib/common.h"
 
@@ -7,10 +8,12 @@ bullet *create_bullet(float x, float y) {
 	bullet *tmp = malloc(sizeof(bullet));
 
 	*tmp = (bullet) {
-		.x = x,
-		.y = y,
-		.prev = tmp,
-		.next = tmp,
+		.size.width	= BULLET_WIDTH,
+		.size.height	= BULLET_HEIGHT,
+		.prev		= tmp,
+		.next		= tmp,
+		.x		= x,
+		.y		= y,
 	};
 
 	return tmp;
@@ -52,6 +55,31 @@ void remove_bullet(bullet **head) {
 	}
 
 	free(tmp);
+}
+
+void draw_bullets(bullet *head) {
+	if (head == NULL)
+		return;
+
+	bullet *tmp = head;
+
+	do {
+		DrawRectangle(head->x + (PLAYER_WIDTH / 2), head->y,
+			      head->size.width, head->size.height, WHITE);
+		head = head->next;
+	} while (head != tmp);
+}
+
+void update_bullets(bullet **head, float dt) {
+	if (*head == NULL)
+		return;
+
+	bullet *tmp = *head;
+
+	do {
+		(*head)->y -= 100 * dt;
+		*head = (*head)->next;
+	} while (*head != tmp);
 }
 
 void debug_bullets(bullet *head) {

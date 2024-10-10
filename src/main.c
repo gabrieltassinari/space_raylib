@@ -19,6 +19,7 @@ int main() {
 
 		update_player(&p, dt);
 		update_enemy(&e, dt);
+		update_bullets(&p.bullets, dt);
 
 		if (IsKeyPressed(KEY_SPACE)) {
 			bullet *tmp = create_bullet(p.x, p.y);
@@ -32,6 +33,7 @@ int main() {
 			ClearBackground(BLACK);
 			draw_player(p);
 			draw_enemy(e);
+			draw_bullets(p.bullets);
 		EndDrawing();
 	}
 	CloseWindow();
