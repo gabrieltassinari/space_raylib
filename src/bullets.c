@@ -96,5 +96,25 @@ void debug_bullets(bullet *head) {
 		       head, head->prev, head->next, head->x, head->y);
 
 		head = head->next;
-	} while (head != tmp && head != NULL);
+	} while (head != tmp);
+}
+
+void bullet_enemy_col(bullet **head, enemy *e) {
+	if (*head == NULL)
+		return;
+
+	bullet *tmp = *head;
+
+	do {
+		if (check_collision(e->x, e->y, e->size, (*head)->x, (*head)->y,
+				    (*head)->size) || (*head)->y < 0) {
+			remove_bullet(head);
+			tmp = *head;
+		}
+
+		if (*head == NULL) return;
+
+		*head = (*head)->next;
+	} while (*head != tmp);
+
 }

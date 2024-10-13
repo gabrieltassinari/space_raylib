@@ -21,6 +21,8 @@ int main() {
 		update_enemy(&e, dt);
 		update_bullets(&p.bullets, dt);
 
+		bullet_enemy_col(&p.bullets, &e);
+
 		if (IsKeyPressed(KEY_SPACE)) {
 			bullet *tmp = create_bullet(p.x, p.y);
 

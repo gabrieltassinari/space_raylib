@@ -18,6 +18,13 @@ typedef struct {
 	int height;
 } size;
 
+typedef struct {
+	int lifes;
+	float x;
+	float y;
+	size size;
+	int dir;
+} enemy;
 
 typedef struct bullet {
 	float x;
@@ -35,6 +42,7 @@ void remove_bullet(bullet **head);
 void debug_bullets(bullet *head);
 void draw_bullets(bullet *head);
 void update_bullets(bullet **head, float dt);
+void bullet_enemy_col(bullet **head, enemy *e);
 
 
 #endif
