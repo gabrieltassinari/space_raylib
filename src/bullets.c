@@ -12,7 +12,7 @@ bullet *create_bullet(float x, float y) {
 		.size.height	= BULLET_HEIGHT,
 		.prev		= tmp,
 		.next		= tmp,
-		.x		= x,
+		.x		= x + (PLAYER_WIDTH / 2),
 		.y		= y,
 	};
 
@@ -64,8 +64,8 @@ void draw_bullets(bullet *head) {
 	bullet *tmp = head;
 
 	do {
-		DrawRectangle(head->x + (PLAYER_WIDTH / 2), head->y,
-			      head->size.width, head->size.height, WHITE);
+		DrawRectangle(head->x, head->y, head->size.width,
+			      head->size.height, WHITE);
 		head = head->next;
 	} while (head != tmp);
 }
