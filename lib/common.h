@@ -7,11 +7,13 @@
 #define PLAYER_WIDTH 50
 #define PLAYER_HEIGHT 50
 
-#define ENEMY_WIDTH 50
-#define ENEMY_HEIGHT 50
+#define ENEMY_WIDTH 15
+#define ENEMY_HEIGHT 15
 
-#define BULLET_WIDTH 5
-#define BULLET_HEIGHT 25
+#define BULLET_WIDTH 3
+#define BULLET_HEIGHT 10
+
+#define TOTAL_ENEMIES 18
 
 typedef struct {
 	int width;
@@ -23,7 +25,8 @@ typedef struct {
 	float x;
 	float y;
 	size size;
-	int dir;
+	int speed;
+	int p_init;
 } enemy;
 
 typedef struct bullet {

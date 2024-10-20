@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <raylib.h>
 
 #include "../lib/player.h"
@@ -6,10 +5,10 @@
 
 int main() {
 	player p;
-	enemy e;
+	enemy e[TOTAL_ENEMIES] = {0};
 
 	p = init_player();
-	e = init_enemy(250, 50);
+	init_enemies(e);
 
 	SetTargetFPS(60);
 	InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Space Invaders!");
@@ -18,10 +17,12 @@ int main() {
 		float dt = GetFrameTime();
 
 		update_player(&p, dt);
-		update_enemy(&e, dt);
 		update_bullets(&p.bullets, dt);
 
-		bullet_enemy_col(&p.bullets, &e);
+		for (int i = 0; i < TOTAL_ENEMIES; i++) {
+			update_enemy(&e[i], dt);
+			bullet_enemy_col(&p.bullets, &e[i]);
+		}
 
 		if (IsKeyPressed(KEY_SPACE)) {
 			bullet *tmp = create_bullet(p.x, p.y);
@@ -34,7 +35,7 @@ int main() {
 		BeginDrawing();
 			ClearBackground(BLACK);
 			draw_player(p);
-			draw_enemy(e);
+			draw_enemies(e);
 			draw_bullets(p.bullets);
 		EndDrawing();
 	}
