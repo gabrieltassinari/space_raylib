@@ -2,6 +2,7 @@
 #define COMMON_H
 
 #include <raylib.h>
+#include <stdlib.h>
 
 #define SCREEN_WIDTH 500
 #define SCREEN_HEIGHT 500
@@ -27,12 +28,14 @@ typedef struct {
 	int height;
 } size;
 
-typedef struct {
-	int lifes;
+typedef struct enemy {
 	float x;
 	float y;
+	struct enemy *prev;
+	struct enemy *next;
 	size size;
 	int speed;
+	int lifes;
 	int p_init;
 } enemy;
 

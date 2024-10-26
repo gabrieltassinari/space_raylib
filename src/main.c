@@ -3,11 +3,12 @@
 
 int main() {
 	player p;
+	enemy *e;
 	float dt;
 	int screen;
 
-	enemy e[TOTAL_ENEMIES] = {0};
 	screen = 0;
+	e = NULL;
 
 	SetTargetFPS(60);
 	InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Space Invaders!");
@@ -19,19 +20,17 @@ int main() {
 		case MENU:
 			if (IsKeyPressed(KEY_ENTER)) {
 				p = init_player();
-				init_enemies(e);
+				init_enemies(&e);
 				screen = GAME;
 			}
 
 			break;
 		case GAME:
 			update_player(&p, dt);
+			update_enemies(&e, dt);
 			update_bullets(&p.bullets, dt);
 
-			for (int i = 0; i < TOTAL_ENEMIES; i++) {
-				update_enemy(&e[i], dt);
-				bullet_enemy_col(&p.bullets, &e[i]);
-			}
+			// bullet_enemy_col(&p.bullets, &e[i]);
 
 			if (IsKeyPressed(KEY_SPACE)) {
 				bullet *tmp = create_bullet(p.x, p.y);
