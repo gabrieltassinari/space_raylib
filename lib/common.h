@@ -1,6 +1,8 @@
 #ifndef COMMON_H
 #define COMMON_H
 
+#include <raylib.h>
+
 #define SCREEN_WIDTH 500
 #define SCREEN_HEIGHT 500
 
@@ -14,6 +16,11 @@
 #define BULLET_HEIGHT 10
 
 #define TOTAL_ENEMIES 18
+
+enum SCREEN {
+	MENU = 0,
+	GAME
+};
 
 typedef struct {
 	int width;
@@ -38,6 +45,7 @@ typedef struct bullet {
 } bullet;
 
 int check_collision(float x1, float y1, size s1, float x2, float y2, size s2);
+void draw_menu();
 
 bullet *create_bullet(float x, float y);
 void insert_bullet(bullet **head, bullet *tmp);

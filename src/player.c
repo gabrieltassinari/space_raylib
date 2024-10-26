@@ -11,8 +11,8 @@ player init_player() {
 		.size.width	= PLAYER_WIDTH,
 		.size.height	= PLAYER_HEIGHT,
 		.lifes		= 3,
-		.x		= 250,
-		.y		= 200,
+		.x		= 225,
+		.y		= 400,
 		.bullets	= NULL,
 	};
 
