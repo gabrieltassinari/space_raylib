@@ -25,19 +25,11 @@ void update_player(player *p, float dt) {
 		p->x += 100 * dt;
 	if (p->x > SCREEN_WIDTH - PLAYER_WIDTH)
 		p->x -= 100 * dt;
-	if (p->y < 0)
-		p->y += 100 * dt;
-	if (p->y > SCREEN_HEIGHT - PLAYER_HEIGHT)
-		p->y -= 100 * dt;
 
 	if (IsKeyDown(KEY_RIGHT))
 		p->x += 100 * dt;
 	if (IsKeyDown(KEY_LEFT))
 		p->x -= 100 * dt;
-	if (IsKeyDown(KEY_UP))
-		p->y -= 100 * dt;
-	if (IsKeyDown(KEY_DOWN))
-		p->y += 100 * dt;
 }
 
 void draw_player(player p) {
