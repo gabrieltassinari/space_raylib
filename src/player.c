@@ -1,10 +1,5 @@
-#include <stdio.h>
 #include "../lib/player.h"
 #include "../lib/common.h"
-
-void player_debug(player p) {
-	printf("(%f, %f)\n", p.x, p.y);
-}
 
 player init_player() {
 	player p = {

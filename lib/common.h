@@ -63,7 +63,6 @@ void insert_list(list **head, list *tmp);
 void remove_list(list **head);
 
 bullet *create_bullet(float x, float y);
-void debug_bullets(bullet *head);
 void draw_bullets(bullet *head);
 void update_bullets(bullet **head, float dt);
 void bullet_enemy_col(bullet **head, enemy **e, int *score);

@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #include "../lib/enemy.h"
 
 enemy *init_enemy(float x, float y) {
@@ -59,21 +57,3 @@ void update_enemies(enemy **head, float dt) {
 		*head = (*head)->next;
 	} while (*head != tmp);
 }
-
-void debug_enemies(enemy *head) {
-	if (head == NULL) {
-		puts("Empty enemies");
-		return;
-	}
-	puts("-----");
-
-	enemy *tmp = head;
-
-	do {
-		printf("Head:\t%p\nPrev:\t%p\nNext:\t%p\nx:\t%f\ny:\t%f\n\n",
-		       head, head->prev, head->next, head->x, head->y);
-
-		head = head->next;
-	} while (head != tmp);
-}
-

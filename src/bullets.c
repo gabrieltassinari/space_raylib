@@ -40,23 +40,6 @@ void update_bullets(bullet **head, float dt) {
 	} while (*head != tmp);
 }
 
-void debug_bullets(bullet *head) {
-	if (head == NULL) {
-		puts("Empty bullets");
-		return;
-	}
-	puts("-----");
-
-	bullet *tmp = head;
-
-	do {
-		printf("Head:\t%p\nPrev:\t%p\nNext:\t%p\nx:\t%f\ny:\t%f\n\n",
-		       head, head->prev, head->next, head->x, head->y);
-
-		head = head->next;
-	} while (head != tmp);
-}
-
 void bullet_enemy_col(bullet **head, enemy **e, int *score) {
 	if (*head == NULL)
 		return;
