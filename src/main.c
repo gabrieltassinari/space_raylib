@@ -31,11 +31,11 @@ int main() {
 			update_enemies(&e, dt);
 			update_bullets(&p.bullets, dt);
 
-			// bullet_enemy_col(&p.bullets, &e[i]);
+			bullet_enemy_col(&p.bullets, &e, &score);
 
 			if (IsKeyPressed(KEY_SPACE)) {
 				bullet *tmp = create_bullet(p.x, p.y);
-				insert_bullet(&p.bullets, tmp);
+				insert_list((list **) &p.bullets, (list *) tmp);
 			}
 
 			if (e == NULL)

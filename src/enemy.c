@@ -20,51 +20,13 @@ enemy *init_enemy(float x, float y) {
 	return e;
 }
 
-void insert_enemy(enemy **head, enemy *tmp) {
-	if (*head != NULL) {
-		// 1 Enemy or 2+ Enemies.
-		if ((*head)->next == *head) {
-			(*head)->next = tmp;
-			tmp->prev = *head;
-		} else {
-			(*head)->prev->next = tmp;
-			tmp->prev = (*head)->prev;
-		}
-
-		(*head)->prev = tmp;
-		tmp->next = *head;
-	}
-
-	*head = tmp;
-}
-
 void init_enemies(enemy **e) {
 	for (int x = 0; x < TOTAL_ENEMIES/2; x++)  {
 		for (int y = 0; y < 2; y++) {
 			enemy *tmp = init_enemy(50*(x+1), 50*(y+1));
-			insert_enemy(e, tmp);
+			insert_list((list **) e, (list *) tmp);
 		}
 	}
-}
-
-void remove_enemy(enemy **head) {
-	if (*head == NULL)
-		return;
-
-	enemy *tmp = *head;
-
-	// 2+ Enemies or only 1 Enemy.
-	if ((*head)->next != *head) {
-		(*head)->prev->next = (*head)->next;
-		(*head)->next->prev = (*head)->prev;
-		*head = (*head)->next;
-	} else {
-		free(*head);
-		*head = NULL;
-		return;
-	}
-
-	free(tmp);
 }
 
 void draw_enemies(enemy *head) {

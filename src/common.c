@@ -21,3 +21,40 @@ void draw_end(int score) {
 void draw_hud(int score, int lifes) {
 	DrawText(TextFormat("Score: %d", score), 20, 10, 30, WHITE);
 }
+
+void insert_list(list **head, list *tmp)
+{
+	if (*head != NULL) {
+		if ((*head)->next == *head) {
+			(*head)->next = tmp;
+			tmp->prev = *head;
+		} else {
+			(*head)->prev->next = tmp;
+			tmp->prev = (*head)->prev;
+		}
+
+		(*head)->prev = tmp;
+		tmp->next = *head;
+	}
+
+	*head = tmp;
+}
+
+void remove_list(list **head) {
+	if (*head == NULL)
+		return;
+
+	list *tmp = *head;
+
+	if ((*head)->next != *head) {
+		(*head)->prev->next = (*head)->next;
+		(*head)->next->prev = (*head)->prev;
+		*head = (*head)->next;
+	} else {
+		free(*head);
+		*head = NULL;
+		return;
+	}
+
+	free(tmp);
+}

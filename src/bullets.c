@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #include "../lib/common.h"
 
 bullet *create_bullet(float x, float y) {
@@ -15,44 +13,6 @@ bullet *create_bullet(float x, float y) {
 	};
 
 	return tmp;
-}
-
-void insert_bullet(bullet **head, bullet *tmp) {
-	if (*head != NULL) {
-		// 1 Bullet or 2+ Bullets.
-		if ((*head)->next == *head) {
-			(*head)->next = tmp;
-			tmp->prev = *head;
-		} else {
-			(*head)->prev->next = tmp;
-			tmp->prev = (*head)->prev;
-		}
-
-		(*head)->prev = tmp;
-		tmp->next = *head;
-	}
-
-	*head = tmp;
-}
-
-void remove_bullet(bullet **head) {
-	if (*head == NULL)
-		return;
-
-	bullet *tmp = *head;
-
-	// 2+ Bullets or only 1 Bullet.
-	if ((*head)->next != *head) {
-		(*head)->prev->next = (*head)->next;
-		(*head)->next->prev = (*head)->prev;
-		*head = (*head)->next;
-	} else {
-		free(*head);
-		*head = NULL;
-		return;
-	}
-
-	free(tmp);
 }
 
 void draw_bullets(bullet *head) {
@@ -97,22 +57,44 @@ void debug_bullets(bullet *head) {
 	} while (head != tmp);
 }
 
-void bullet_enemy_col(bullet **head, enemy *e) {
+void bullet_enemy_col(bullet **head, enemy **e, int *score) {
 	if (*head == NULL)
 		return;
 
-	bullet *tmp = *head;
+	enemy *tmp_e;
+	bullet *tmp_b;
+
+	tmp_e = *e;
 
 	do {
-		if (check_collision(e->x, e->y, e->size, (*head)->x, (*head)->y,
-				    (*head)->size) || (*head)->y < 0) {
-			remove_bullet(head);
-			tmp = *head;
+		tmp_b = *head;
+
+		do {
+			if (check_collision((*e)->x, (*e)->y, (*e)->size,
+					    (*head)->x, (*head)->y,
+					    (*head)->size) || (*head)->y < 0) {
+				if ((*head)->y > 10)
+					(*e)->lifes--;
+
+				remove_list((list **) head);
+				tmp_b = *head;
+			}
+
+			if (*head == NULL) return;
+
+			*head = (*head)->next;
+		} while (*head != tmp_b);
+
+		if ((*e)->lifes < 1) {
+			remove_list((list **) e);
+			tmp_e = *e;
+
+			(*score) += 30;
 		}
 
-		if (*head == NULL) return;
+		if (*e == NULL) return;
 
-		*head = (*head)->next;
-	} while (*head != tmp);
+		*e = (*e)->next;
+	} while  (*e != tmp_e);
 
 }

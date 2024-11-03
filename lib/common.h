@@ -3,6 +3,7 @@
 
 #include <raylib.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #define SCREEN_WIDTH 500
 #define SCREEN_HEIGHT 500
@@ -24,16 +25,21 @@ enum SCREEN {
 	END
 };
 
-typedef struct {
+typedef struct size {
 	int width;
 	int height;
 } size;
 
+typedef struct list {
+	struct list *prev;
+	struct list *next;
+} list;
+
 typedef struct enemy {
-	float x;
-	float y;
 	struct enemy *prev;
 	struct enemy *next;
+	float x;
+	float y;
 	size size;
 	int speed;
 	int lifes;
@@ -41,10 +47,10 @@ typedef struct enemy {
 } enemy;
 
 typedef struct bullet {
-	float x;
-	float y;
 	struct bullet *prev;
 	struct bullet *next;
+	float x;
+	float y;
 	size size;
 } bullet;
 
@@ -53,13 +59,14 @@ void draw_menu();
 void draw_end(int score);
 void draw_hud(int score, int lifes);
 
+void insert_list(list **head, list *tmp);
+void remove_list(list **head);
+
 bullet *create_bullet(float x, float y);
-void insert_bullet(bullet **head, bullet *tmp);
-void remove_bullet(bullet **head);
 void debug_bullets(bullet *head);
 void draw_bullets(bullet *head);
 void update_bullets(bullet **head, float dt);
-void bullet_enemy_col(bullet **head, enemy *e);
+void bullet_enemy_col(bullet **head, enemy **e, int *score);
 
 
 #endif
