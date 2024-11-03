@@ -2,12 +2,13 @@
 #include "../lib/enemy.h"
 
 int main() {
+	int screen, score;
 	player p;
 	enemy *e;
 	float dt;
-	int screen;
 
-	screen = 0;
+	screen = MENU;
+	score = 0;
 	e = NULL;
 
 	SetTargetFPS(60);
@@ -34,11 +35,15 @@ int main() {
 
 			if (IsKeyPressed(KEY_SPACE)) {
 				bullet *tmp = create_bullet(p.x, p.y);
-
 				insert_bullet(&p.bullets, tmp);
-				debug_bullets(p.bullets);
 			}
 
+			if (e == NULL)
+				screen = END;
+			break;
+		case END:
+			if (IsKeyPressed(KEY_ENTER))
+				screen = MENU;
 			break;
 		}
 
@@ -50,9 +55,13 @@ int main() {
 				draw_menu();
 				break;
 			case GAME:
+				draw_hud(score, p.lifes);
 				draw_player(p);
 				draw_enemies(e);
 				draw_bullets(p.bullets);
+				break;
+			case END:
+				draw_end(score);
 				break;
 			}
 		EndDrawing();

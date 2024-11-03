@@ -20,7 +20,8 @@
 
 enum SCREEN {
 	MENU = 0,
-	GAME
+	GAME,
+	END
 };
 
 typedef struct {
@@ -49,6 +50,8 @@ typedef struct bullet {
 
 int check_collision(float x1, float y1, size s1, float x2, float y2, size s2);
 void draw_menu();
+void draw_end(int score);
+void draw_hud(int score, int lifes);
 
 bullet *create_bullet(float x, float y);
 void insert_bullet(bullet **head, bullet *tmp);

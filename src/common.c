@@ -9,3 +9,15 @@ void draw_menu() {
 	DrawText("Space Invaders", 12, SCREEN_HEIGHT*0.10, 60, GREEN);
 	DrawText("Press ENTER", SCREEN_WIDTH*0.30, SCREEN_HEIGHT*0.35, 30, GREEN);
 }
+
+void draw_end(int score) {
+	DrawText("Space Invaders", 12, SCREEN_HEIGHT*0.10, 60, GREEN);
+	DrawText(TextFormat("Total Score: %d", score), SCREEN_WIDTH*0.30,
+		 SCREEN_HEIGHT*0.35, 30, WHITE);
+	DrawText("Press ENTER to play again!", SCREEN_WIDTH*0.10,
+		 SCREEN_HEIGHT*0.50, 30, WHITE);
+}
+
+void draw_hud(int score, int lifes) {
+	DrawText(TextFormat("Score: %d", score), 20, 10, 30, WHITE);
+}
